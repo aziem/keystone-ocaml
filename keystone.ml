@@ -39,7 +39,7 @@ let ks_open arch ?(endian=Types.KS_MODE_LITTLE_ENDIAN) mode =
          
        end
     | Types.KS_MODE_LITTLE_ENDIAN -> Ok(Ffi_generated_types.constant (Types.string_of_ks_mode mode) int64_t)
-    | _ -> Error("Non-endian mode")(* TODO: better error handling here *)
+    | _ -> Error("Non-endian mode passed to endian arg of ks_open: use KS_MODE_BIG_ENDIAN or KS_MODE_LITTLE_ENDIAN")
   in
   let mode =
     match check_endian with
