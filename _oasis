@@ -1,0 +1,65 @@
+OASISFormat:    0.4
+OCamlVersion:   >= 4.01
+Name:           keystone
+Version:        0.1
+Synopsis:       Ctypes bindings to Keystone assembler for OCaml
+Authors:        Aziem Chawdhary
+License:        LGPL-2.1 with OCaml linking exception
+Plugins:        DevFiles (0.4)
+BuildTools:     ocamlbuild
+
+Library keystone
+  Path: .
+  Modules: Keystone	
+  InternalModules: Ffi_generated
+  CSources: ffi_generated_stubs.c
+  CCLib: -lkeystone
+  CCOpt:            -I $pkg_ctypes_stubs
+  BuildDepends:     keystone_bindings, ctypes, uchar
+  CompiledObject: native
+
+Library keystone_types
+  Path: .
+  Modules: Ffi_types
+  CCLib: -lkeystone
+  BuildDepends: ctypes.stubs, ctypes.foreign
+  CompiledObject: native
+
+
+Library keystone_bindings
+  Install : true
+  Path: .
+  Modules:	Ffi_bindings
+  CCLib: -lkeystone
+  BuildDepends:    ctypes.stubs, ctypes.foreign, keystone_types
+  CompiledObject: native
+
+Document keystone
+  Type: ocamlbuild (0.4)
+  BuildTools : ocamldoc
+  Title: API reference for Keystone
+  XOCamlBuildPath: .
+  XOCamlBuildlibraries: keystone
+
+Executable ffi_types_stubgen
+  Install: false
+  Path: .
+  MainIs: ffi_types_stubgen.ml
+  BuildDepends: keystone_types
+  CompiledObject: native
+
+Executable ffi_stubgen
+  Install: false
+  Path: .
+  MainIs: ffi_stubgen.ml
+  BuildDepends:   keystone_bindings
+  CompiledObject : native  
+
+Executable test_bindings
+  Install: false
+  CCLib: -lkeystone
+  Path: .
+  MainIs: test_bindings.ml
+  BuildDepends: keystone
+  CompiledObject: native
+  
