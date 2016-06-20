@@ -126,6 +126,7 @@ val ks_option :
   Types.ks_t ->
   Types.ks_opt_type -> Types.ks_opt_value -> Types.ks_error
 
+(** Given a ks_err type, returns a string description of the error. *)
 val ks_strerror : Types.ks_error -> string
 
 
@@ -151,7 +152,7 @@ val ks_errno :
 
 
 (** Assemble a string: takes a Keystone engine instance, a string to
-assember and a start address to assemble from. 
+assemble and a start address to assemble from. 
 
 On success returns Ok with a encoded_result record
  *)
