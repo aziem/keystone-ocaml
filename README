@@ -1,6 +1,6 @@
 OCaml bindings to the Keystone library (www.keytone-engine.org)
 
-Requires OCaml and Opam.
+Requires OCaml and Opam and Oasis.
 
 To Build:
 
@@ -10,7 +10,7 @@ To Build:
 
    opam install ctypes ctypes-foreign uchar ocamlfind
 
-3. Run opam setup
+3. Run oasis setup
 
 4. Run make
 
